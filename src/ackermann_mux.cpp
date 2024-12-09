@@ -110,8 +110,11 @@ void AckermannMux::updateDiagnostics()
 }
 
 void AckermannMux::publishAckermann(const ackermann_msgs::msg::AckermannDriveStamped::ConstSharedPtr & msg)
-{
-  cmd_pub_->publish(*msg);
+{ 
+  ackermann_msgs::msg::AckermannDriveStamped mega_msg;
+  mega_msg = *msg;
+  mega_msg.drive.steering_angle *= 1.3;
+  cmd_pub_->publish(mega_msg);
 }
 
 template<typename T>
